@@ -3,18 +3,13 @@ public:
     int pivotIndex(vector<int>& nums) 
     {
         int n=nums.size();
-        vector<int>p(n,0),s(n,0);
-        for(int i=1;i<n;i++)
-        {
-            p[i]=p[i-1]+nums[i-1];
-        }
-        for(int i=n-2;i>=0;i--)
-        {
-            s[i]=s[i+1]+nums[i+1];
-        }
+        int right=0,left=0;
+        for(int i=0;i<n;i++) right+=nums[i];
         for(int i=0;i<n;i++)
         {
-            if(p[i]==s[i]) return i;
+            right-=nums[i];
+            if(right==left) return i;
+            left+=nums[i];
         }
         return -1;
     }
